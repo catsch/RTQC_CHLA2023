@@ -247,7 +247,7 @@ for (IDnc in LIST_nc) {
 
 	CHLA_FLUORESCENCE = CHLA
 
-	CHLA_FLUORESCENCE_ADJUSTED = CHLA_ADJUSTED 
+	CHLA_FLUORESCENCE_ADJUSTED = 2*CHLA_ADJUSTED #### no reason to multiply by 2 , this is fluorescence !!!! be careful of the slope
 
 ###########################################################
 ##  Init the QC  
