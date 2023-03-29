@@ -2,7 +2,7 @@ npq_chla <- function(PRES,CHLA_ADJUSTED,MLD,median_window) {
 
 ########### Filter the data 
 
-MED_CHLA_ADJUSTED=RunningFilter(median_window,CHLA_ADJUSTED,na.fill=T, ends.fill=T, Method="Median") # From Equation 5 
+MED_CHLA_ADJUSTED=RunningFilter(median_window,CHLA_ADJUSTED,na.fill=T, ends.fill=T, Method="Median") # From Equation 12 
 
 #####  ALT 1 # RES=CHLA_ADJUSTED-MED_CHLA_ADJUSTED ## Equation 4
 
@@ -24,7 +24,7 @@ print(MLD)
 
 #####  ALT 2 #
 
-npq_value=max(MED_CHLA_ADJUSTED[PRES<=0.9*MLD],na.rm=TRUE)
+npq_value=max(MED_CHLA_ADJUSTED[PRES<=0.9*MLD],na.rm=TRUE)   # Equation 14
 
 #print(npq_value)
 

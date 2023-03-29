@@ -151,7 +151,7 @@ for (IDnc in LIST_nc) {
 
 
 ##########################################################
-### Estimate the size of the sliding median 
+### Estimate the size of the sliding median Equation 13
 ##########################################################
 	
  	DELTA_PRES=diff(PRES_CTD[,iprof_chla])
@@ -210,21 +210,21 @@ for (IDnc in LIST_nc) {
 ##      DARK WORK 
 ###########################################################
 
-	if ( max(PRES_CHLA,na.rm=TRUE) >= 950 & icount_dark < 5 ) {
+	if ( max(PRES_CHLA,na.rm=TRUE) >= 950 & icount_dark < 5 ) {    #### Test 4
 
 		icount_dark=icount_dark+1  ### Test 3 ###
 
-		iDARK=dark_chla(FLUORESCENCE,median_window)
+		iDARK=dark_chla(FLUORESCENCE,median_window) # Equation 4
 
-		PRELIM_DARK[icount_dark] = iDARK # Test4 
+		PRELIM_DARK[icount_dark] = iDARK # Equation 6
 
 #		print(PRELIM_DARK)
 
-		DARK_PRIM_CHLA=median(PRELIM_DARK,na.rm=TRUE)
+		DARK_PRIM_CHLA=median(PRELIM_DARK,na.rm=TRUE) # Equation 7 
 
-		if ( icount_dark == 5 ) {
+		if ( icount_dark == 5 ) { 
 
-			if ( abs( DARK_PRIM_CHLA - FACTORY_DARK_CHLA) >= 0.25 * FACTORY_DARK_CHLA) {
+			if ( abs( DARK_PRIM_CHLA - FACTORY_DARK_CHLA) >= 0.25 * FACTORY_DARK_CHLA) {	# Test 5
 
 				DARK_PRIM_CHLA_QC="3"   ### if float_dark_chla is too far from calibration there is an issue 
 
@@ -241,7 +241,7 @@ for (IDnc in LIST_nc) {
 ##  Apply the DARK Value to the adjusted Field
 ##############################################################
 
-	CHLA_ADJUSTED=FACTORY_SCALE_CHLA*(FLUORESCENCE_CHLA-DARK_PRIM_CHLA)/2
+	CHLA_ADJUSTED=FACTORY_SCALE_CHLA*(FLUORESCENCE_CHLA-DARK_PRIM_CHLA)/2  # Equation 9 and Equation 16
 
 ######  AND DEFINE CHLA_FLUORESCENCE PARAMETER 
 
@@ -304,7 +304,7 @@ for (IDnc in LIST_nc) {
 
 		for (p in 1:NPQ$INDEX){
 
-			CHLA_ADJUSTED[p,iprof_chla]=NPQ$VALUE
+			CHLA_ADJUSTED[p,iprof_chla]=NPQ$VALUE  # Equation 15
 
 			CHLA_ADJUSTED_QC_value[p]=5
 
