@@ -255,11 +255,25 @@ for (IDnc in LIST_nc) {
 
 	CHLA_QC_value = rep("3", length(PRES_CHLA) )
 
-	CHLA_ADJUSTED_QC_value = rep(DARK_PRIM_CHLA_QC, length(PRES_CHLA) )
+	if (FLAG_QUENCHING & MLD=0) {   # sun and no way to determine MLD MLD =0  not very happy with it 
 
-	CHLA_FLUORESCENCE_QC_value = rep("1", length(PRES_CHLA) )  #### need to check the 
+		CHLA_ADJUSTED_QC_value = rep("3", length(PRES_CHLA) )   
+
+	} else { 
+	
+		CHLA_ADJUSTED_QC_value = rep(DARK_PRIM_CHLA_QC, length(PRES_CHLA) )
+
+	}
+
+	CHLA_FLUORESCENCE_QC_value = rep("1", length(PRES_CHLA) )  
 
 	CHLA_FLUORESCENCE_ADJUSTED_QC_value = rep("1", length(PRES_CHLA) )
+
+#############################################################
+##	# sun and no way to determine MLD 
+#############################################################
+
+	if (FLAG_QUENCHING & MLD=0) CHLA_ADJUSTED_QC_value = rep("3", length(PRES_CHLA) )   
 
 ###########################################################
 # GLOBAL RANGE TEST 
