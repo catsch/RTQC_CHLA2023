@@ -11,8 +11,10 @@ do
 		cp -fr ${GDACDATA}${mission} ${WORKDATA}${mission}
 	fi
 
-#	ls -1 ${WORKDATA}${mission}"/profiles/"B*.nc | grep -v D.nc > liste_all_B
+	ls -1 ${WORKDATA}${mission}"/profiles/"B*.nc | grep -v D.nc > liste_all_B
  
 	R $mission --vanilla < ./CHLA_RTQC_ADJ.R
+
+	mv *.png PNG_CORIOLIS/"$mission/"
 
 done

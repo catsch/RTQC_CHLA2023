@@ -298,6 +298,28 @@ for (IDnc in LIST_nc) {
 
 	}
 
+
+#########################################
+# PLOT
+#########################################
+
+	MINDEPTH=max(PRES_CHLA)
+	MAXCHLA=2*max(CHLA_ADJUSTED,na.rm=TRUE)
+	#MINDEPTH=MLD+50
+	MINDEPTH=400
+
+	name_file=str_sub(IDnc,str_length(IDnc)-15,str_length(IDnc)-3)
+
+	png(file=paste(name_file,".png",sep=""))
+
+	matplot(2*CHLA_ADJUSTED[,iprof_chla],PRES_CHLA,col=2,lwd=2,type="l",ylab="Depth [m]",cex.lab=1.5,cex.axis=1.5,xlab=expression("Chlorophyll a [mg."*m ^ -3 * "]"),xlim=c(-0.2,MAXCHLA+0.5),ylim=rev(c(0, MINDEPTH)))
+	matplot(CHLA[,iprof_chla],PRES_CHLA,col=5,lwd=2,type="l",ylab="Depth [m]",cex.lab=1.5,cex.axis=1.5,xlab=expression("Chlorophyll a [mg."*m ^ -3 * "]"),xlim=c(-0.2,MAXCHLA+0.5),ylim=rev(c(0, MINDEPTH)),add=TRUE)
+
+	legend("bottomright",c("CHLA_NPQ","CHLA"),pch=c(".","."),lwd=c(2,2),col=c(2,5),lty=c(1,1),cex=1.2)
+
+
+	dev.off()
+
 ###########################################################################
 #	Create the new variables in the nc file
 ###########################################################################
