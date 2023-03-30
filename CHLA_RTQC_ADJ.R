@@ -114,6 +114,8 @@ for (IDnc in LIST_nc) {
 
 	FLAG_QUENCHING=FALSE
 
+	MLD=NA
+
 
 ############################################################
 ## work on index 
