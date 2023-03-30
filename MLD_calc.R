@@ -43,16 +43,15 @@ if (length(which((MLD_CALC>MLD_LIMIT)==TRUE)) > 0) {
 
 	MLD=PRES_CTD[i_MLD]
 
+	FLAG_MLD=TRUE
+
 } else {
 
-# on initialise au max de profondeur au cas ou on ne trouverait pas de MLD
-
-#	MLD=max(PRES_CTD,na.rm=TRUE)
-	MLD=0
+	FLAG_MLD=FALSE
 
 }
 
-return(MLD)
+return(list("value"=MLD,"FLAG"=FLAG_MLD)
 
 }
 

@@ -39,6 +39,14 @@ uf=commandArgs()
 mission  <- uf[2]
 
 ##################################################################
+#  FLAG_MLD et FLAG_QUENCHING 
+##################################################################
+
+FLAG_MLD=FALSE
+
+FLAG_QUENCHING=FALSE
+
+##################################################################
 ##  GLOBAL RANGE 
 ##################################################################
 
@@ -145,7 +153,11 @@ for (IDnc in LIST_nc) {
 
 	PRES_CTD=ncvar_get(filenc_C,"PRES")
 
-	MLD=MLD_calc(PRES_CTD, PSAL_CTD , TEMP_CTD)
+	MLD_res=MLD_calc(PRES_CTD, PSAL_CTD , TEMP_CTD)
+
+	MLD=MLD_res$value
+
+	FLAG_MLD=MLD_res$FLAG
 
 	print(MLD)
 
@@ -255,7 +267,7 @@ for (IDnc in LIST_nc) {
 
 	CHLA_QC_value = rep("3", length(PRES_CHLA) )
 
-	if (FLAG_QUENCHING & MLD=0) {   # sun and no way to determine MLD MLD =0  not very happy with it 
+	if (FLAG_QUENCHING & FLAG_MLD) {   # sun and no way to determine MLD 
 
 		CHLA_ADJUSTED_QC_value = rep("3", length(PRES_CHLA) )   
 
@@ -269,11 +281,6 @@ for (IDnc in LIST_nc) {
 
 	CHLA_FLUORESCENCE_ADJUSTED_QC_value = rep("1", length(PRES_CHLA) )
 
-#############################################################
-##	# sun and no way to determine MLD 
-#############################################################
-
-	if (FLAG_QUENCHING & MLD=0) CHLA_ADJUSTED_QC_value = rep("3", length(PRES_CHLA) )   
 
 ###########################################################
 # GLOBAL RANGE TEST 
@@ -298,7 +305,7 @@ for (IDnc in LIST_nc) {
 #############################################################
 # Quenching Correction 
 #############################################################
-	if (FLAG_QUENCHING & MLD>0) {
+	if (FLAG_QUENCHING & FLAG_MLD) {
 
 		NPQ=npq_chla(PRES_CHLA,CHLA_ADJUSTED[,iprof_chla],MLD,median_window)
 
