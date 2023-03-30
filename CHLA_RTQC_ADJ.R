@@ -267,7 +267,7 @@ for (IDnc in LIST_nc) {
 
 	CHLA_QC_value = rep("3", length(PRES_CHLA) )
 
-	if (FLAG_QUENCHING & FLAG_MLD) {   # sun and no way to determine MLD 
+	if (FLAG_QUENCHING & !FLAG_MLD) {   # sun and no way to determine MLD 
 
 		CHLA_ADJUSTED_QC_value = rep("3", length(PRES_CHLA) )   
 
