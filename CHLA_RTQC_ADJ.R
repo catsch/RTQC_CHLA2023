@@ -221,6 +221,17 @@ for (IDnc in LIST_nc) {
 
 	Ndepth=length(PRES_CHLA[!is.na(PRES_CHLA)])
 
+	#### TEst on MLD compare to PRES_CHLA
+
+	if (FLAG_MLD) {
+
+		if ( 0.9*MLD < min(PRES_CHLA,na.rm=TRUE)) FLAG_MLD=FALSE
+
+	}
+
+
+	
+
 ###########################################################
 ##      DARK WORK 
 ###########################################################
